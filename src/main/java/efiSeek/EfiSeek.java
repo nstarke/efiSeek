@@ -133,7 +133,7 @@ public class EfiSeek extends EfiUtils {
 
 	public void findGuids() {
 		Address start = this.mem.getMinAddress();
-		Address end = this.mem.getMaxAddress();
+		Address end = start.add(this.mem.getSize());
 
 		for (Address Addr = start; Addr.getOffset() + 4 < end.getOffset(); Addr = Addr.add(4)) {
 			byte[] rawGuid = new byte[16];
