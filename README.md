@@ -1,5 +1,7 @@
 # ***efiSeek for Ghidra***
 
+# **Note:** This fork contains fixes to work with Ghidra 11.2.1
+
 ## About
 
 The analyzer automates the process of researching EFI files, helps to discover and analyze well-known protocols, smi handlers, etc.
