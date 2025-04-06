@@ -43,7 +43,7 @@ configurations {
 }
 
 dependencies {
-    toCopy 'org.json:json:20200518'      
+    implementation 'org.json:json:20200518'      
 }
 
 task copyToLib(type: Copy) {
