@@ -113,7 +113,7 @@ public abstract class EfiUtils extends FlatProgramAPI {
 				!getCurrentProgram().getLanguage().isBigEndian());
 		int ntHeaderOffset = reader.readInt(0x3C);
 		ntHeader = new NTHeader(reader, ntHeaderOffset,
-			PortableExecutable.SectionLayout.FILE, false, false);
+			PortableExecutable.SectionLayout.FILE, false);
 
 		long baseEntyPoint = ntHeader.getOptionalHeader().getAddressOfEntryPoint();
 		return getCurrentProgram().getImageBase().add(baseEntyPoint);
