@@ -105,6 +105,9 @@ public class EfiSeekAnalyzer extends AbstractAnalyzer {
 		case MachineConstants.IMAGE_FILE_MACHINE_I386:
 			this.gdtFileName = "Behemotx32.gdt";
 			break;
+		case MachineConstants.IMAGE_FILE_MACHINE_ARM64:
+			this.gdtFileName = "Behemotx64.gdt";
+			break;
 		default:
 			Msg.error(this, "Unknown arch");
 			return false;
