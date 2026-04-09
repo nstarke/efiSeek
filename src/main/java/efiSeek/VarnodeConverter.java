@@ -17,6 +17,7 @@ package efiSeek;
 import ghidra.program.flatapi.FlatProgramAPI;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.lang.Register;
 import ghidra.program.model.pcode.PcodeOp;
 import ghidra.program.model.pcode.Varnode;
 import ghidra.program.model.symbol.SourceType;
@@ -37,9 +38,14 @@ public class VarnodeConverter {
 	private HashMap<Variable, Long> mulOffset = new HashMap<Variable, Long>();
 	
 	private FlatProgramAPI flatProgramAPI = null;
+	private long stackPointerOffset = -1;
 
 	public VarnodeConverter(Program prog) {
 		this.flatProgramAPI = new FlatProgramAPI(prog);
+		Register sp = prog.getCompilerSpec().getStackPointer();
+		if (sp != null) {
+			this.stackPointerOffset = sp.getOffset();
+		}
 	}
 	
 	public void newVarnode(Varnode inVar) {
@@ -174,7 +180,7 @@ public class VarnodeConverter {
 		// check reg and find local var match this reg
 		if (var1.isRegister()) {
 			// stack pointer; need find var with this stack offset
-			if (var1.getOffset() == 0x20) {
+			if (stackPointerOffset >= 0 && var1.getOffset() == stackPointerOffset) {
 				this.finalVar = this.findStackVar(var1, (int) var2.getOffset());
 				return;
 			}
@@ -199,7 +205,7 @@ public class VarnodeConverter {
 			return;
 		}
 		if (var1.isRegister()) {
-			if (var1.getOffset() == 0x20) {
+			if (stackPointerOffset >= 0 && var1.getOffset() == stackPointerOffset) {
 				this.finalVar = this.findStackVar(var1, (int) var2.getOffset());
 				return;
 			}

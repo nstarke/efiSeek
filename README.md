@@ -6,6 +6,8 @@
 
 The analyzer automates the process of researching EFI files, helps to discover and analyze well-known protocols, smi handlers, etc.
 
+Supported architectures: x86, x86-64, AARCH64.
+
 ## Features
 
 ### Finds known EFI GUID's
